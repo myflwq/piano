@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Piano</title>
+	<style>
+	.wrap{
+		width: 840px;
+		margin: 260px auto;
+
+	}
+	.btn{
+		width: 100px;
+		height: 100px;
+		font-size: 30px;
+		line-height: 100px;
+		text-align: center;
+		float: left;margin-left: 20px;
+		border-radius: 10px;
+	}
+	.btn1{
+		background-color: #f5162b;
+	}
+	.btn2{
+		background-color: #f55a16;
+	}
+	.btn3{
+		background-color: #f5dd16;
+	}
+	.btn4{
+		background-color: #1bf516;
+	}
+	.btn5{
+		background-color: #1694f5;
+	}
+	.btn6{
+		background-color: #f516c8;
+	}
+	.btn7{
+		background-color: #d816f5;
+	}
+	.show{
+		box-shadow:  0px 0px 20px #000 inset;
+	}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="btn1 btn">E</div>
+		<div class="btn2 btn">R</div>
+		<div class="btn3 btn">T</div>
+		<div class="btn4 btn">Y</div>
+		<div class="btn5 btn">U</div>
+		<div class="btn6 btn">I</div>
+		<div class="btn7 btn">O</div>
+	</div>
+
+	<script src="js/jquery-1.11.1.js"></script>
+	<script>
+		$(document).ready(function(){
+
+			var musicData = [
+			{key:"E",src:"source/01.mp3"},
+			{key:"R",src:"source/02.mp3"},
+			{key:"T",src:"source/03.mp3"},
+			{key:"Y",src:"source/04.mp3"},
+			{key:"U",src:"source/05.mp3"},
+			{key:"I",src:"source/06.mp3"},
+			{key:"O",src:"source/07.mp3"}
+			];
+			//键盘事件
+			$(document).keydown(function(event){
+				var keyChar = String.fromCharCode(event.keyCode);
+
+				for(var i=0;i<musicData.length;i++){
+					if(musicData[i].key == keyChar){
+						var AUDIO = new Audio();
+						AUDIO.src = musicData[i].src;
+						AUDIO.play();
+						$(".btn").eq(i).addClass("show");
+					}
+				}
+
+			});
+			$(document).keyup(function(event){
+				$(".btn").removeClass("show");
+			});
+
+
+			//鼠标事件
+
+
+			$(".btn").mousedown(function(event){
+				var index = $(this).index();
+				var AUDIO = new Audio();
+				AUDIO.src = musicData[index].src;
+				AUDIO.play();
+				$(".btn").eq(index).addClass("show");
+				});
+			$(".btn").mouseup(function(event){
+				$(".btn").removeClass("show");
+			});
+
+
+
+		});
+	</script>
+</body>
+</html>
